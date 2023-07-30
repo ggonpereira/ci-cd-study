@@ -13,7 +13,7 @@ export const useLoginController = () => {
   const {
     handleSubmit: hookFormHandleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
@@ -22,5 +22,5 @@ export const useLoginController = () => {
     console.info("data", data);
   });
 
-  return { handleSubmit, register, errors };
+  return { handleSubmit, register, errors, isValid };
 };
