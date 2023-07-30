@@ -1,23 +1,19 @@
-import { Link } from "react-router-dom";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
+import { FormHeader } from "../../components/FormHeader";
+import { FormRoot } from "../../components/FormRoot";
 
 export const Register = () => {
   return (
     <>
-      <header className="align-center flex flex-col justify-center gap-4 text-center">
-        <h1 className="text-2xl font-bold leading-8">Create your account</h1>
+      <FormHeader
+        title="Create your account"
+        ctaHelperText="Already has an account?"
+        ctaLink="/login"
+        ctaText="Login"
+      />
 
-        <p className="space-x-2 tracking-[-0.5px]">
-          <span className="text-gray-700">Already has an account?</span>
-
-          <Link to="/login" className="font-medium text-blue-900">
-            Login
-          </Link>
-        </p>
-      </header>
-
-      <form className="mt-[60px] flex flex-col gap-4">
+      <FormRoot>
         <Input type="text" name="name" id="name" placeholder="Name" />
         <Input type="email" name="email" id="email" placeholder="Email" />
         <Input
@@ -28,7 +24,7 @@ export const Register = () => {
         />
 
         <Button>Create account</Button>
-      </form>
+      </FormRoot>
     </>
   );
 };
