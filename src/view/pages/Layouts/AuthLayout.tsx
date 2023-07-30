@@ -19,7 +19,7 @@ export const AuthLayout = () => {
           className="h-full max-h-[960px] w-full max-w-[656px] select-none rounded-[32px] object-cover"
         />
 
-        <div className="absolute bottom-8 m-8 mb-0 max-w-[656px] rounded-b-[32px] bg-white px-10 py-12 ">
+        <div className="absolute bottom-8 mx-8 max-w-[656px] rounded-b-[32px] bg-white px-10 py-12 ">
           <Logo className="h-8 text-blue-900" />
 
           <p className="mt-6 text-xl font-medium text-gray-700">
