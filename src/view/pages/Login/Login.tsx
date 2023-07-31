@@ -5,7 +5,8 @@ import { FormRoot } from "../../components/FormRoot";
 import { useLoginController } from "./useLoginController";
 
 export const Login = () => {
-  const { handleSubmit, register, errors, isValid } = useLoginController();
+  const { handleSubmit, register, errors, isValid, isLoading } =
+    useLoginController();
 
   return (
     <>
@@ -32,7 +33,9 @@ export const Login = () => {
           {...register("password")}
         />
 
-        <Button disabled={!isValid}>Enter</Button>
+        <Button disabled={!isValid} isLoading={isLoading}>
+          Enter
+        </Button>
       </FormRoot>
     </>
   );
