@@ -1,6 +1,10 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { authService } from "../../../app/services/authService";
+import { useMutation } from "@tanstack/react-query";
+import { SignUpParams } from "../../../app/services/authService/signUp";
+import { toast } from "react-hot-toast";
 
 const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$/;
 
@@ -35,8 +39,24 @@ export const useRegisterController = () => {
     resolver: zodResolver(schema),
   });
 
-  const handleSubmit = hookFormHandleSubmit((data) => {
-    console.info("data", data);
+  const { isLoading, mutateAsync } = useMutation({
+    mutationFn: async (data: SignUpParams) => {
+      return authService.signUp(data);
+    },
+  });
+
+  const handleSubmit = hookFormHandleSubmit(async (data) => {
+    try {
+      await mutateAsync({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      });
+
+      toast.success("Account created successfully.");
+    } catch (error) {
+      toast.error("There was an error creating your account.");
+    }
   });
 
   return {
@@ -44,5 +64,6 @@ export const useRegisterController = () => {
     register,
     errors,
     isValid,
+    isLoading,
   };
 };

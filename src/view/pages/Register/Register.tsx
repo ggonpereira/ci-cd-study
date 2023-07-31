@@ -5,7 +5,8 @@ import { FormRoot } from "../../components/FormRoot";
 import { useRegisterController } from "./useRegisterController";
 
 export const Register = () => {
-  const { register, errors, handleSubmit, isValid } = useRegisterController();
+  const { register, errors, handleSubmit, isValid, isLoading } =
+    useRegisterController();
 
   return (
     <>
@@ -46,7 +47,9 @@ export const Register = () => {
           {...register("confirmPassword")}
         />
 
-        <Button disabled={!isValid}>Create account</Button>
+        <Button disabled={!isValid} isLoading={isLoading}>
+          Create account
+        </Button>
       </FormRoot>
     </>
   );
