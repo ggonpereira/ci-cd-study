@@ -46,17 +46,13 @@ export const useRegisterController = () => {
   });
 
   const handleSubmit = hookFormHandleSubmit(async (data) => {
-    try {
-      await mutateAsync({
-        name: data.name,
-        email: data.email,
-        password: data.password,
-      });
+    await mutateAsync({
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    });
 
-      toast.success("Account created successfully.");
-    } catch (error) {
-      toast.error("There was an error creating your account.");
-    }
+    toast.success("Account created successfully.");
   });
 
   return {

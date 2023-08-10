@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { SignInParams } from "../../../app/services/authService/signIn";
 import { authService } from "../../../app/services/authService";
+import { useAuthContext } from "../../../app/hooks/useAuth";
 
 const schema = z.object({
   email: z.string().nonempty().email(),
@@ -22,6 +23,8 @@ export const useLoginController = () => {
     resolver: zodResolver(schema),
   });
 
+  const { signIn } = useAuthContext();
+
   const { isLoading, mutateAsync } = useMutation({
     mutationFn: async (data: SignInParams) => {
       return authService.signIn(data);
@@ -29,13 +32,10 @@ export const useLoginController = () => {
   });
 
   const handleSubmit = hookFormHandleSubmit(async (data) => {
-    try {
-      await mutateAsync(data);
+    const { accessToken } = await mutateAsync(data);
+    signIn(accessToken);
 
-      toast.success("Successfully logged in.");
-    } catch (error) {
-      toast.error("Invalid credentials.");
-    }
+    toast.success("Successfully logged in.");
   });
 
   return { handleSubmit, register, errors, isValid, isLoading };
