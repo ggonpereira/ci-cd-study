@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   });
 
   const { isError } = useQuery({
-    queryKey: ["loggedUser"],
+    queryKey: ["users", "me"],
     queryFn: () => usersService.me(),
     enabled: signedIn,
   });
