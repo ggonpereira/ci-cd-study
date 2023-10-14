@@ -7,7 +7,6 @@ import { getCookie } from "../utils/cookie";
 import { toast } from "react-hot-toast";
 import { cookieKeys } from "../config/cookieKeys";
 import { useEffect } from "react";
-import { useAuthContext } from "../hooks/useAuth";
 
 interface AxiosInterceptorProps {
   children: React.ReactNode;
@@ -22,8 +21,6 @@ export const httpClient = axios.create({
 });
 
 export const AxiosInterceptor = ({ children }: AxiosInterceptorProps) => {
-  const { signOut } = useAuthContext();
-
   useEffect(() => {
     const reqSuccessInterceptor = (config: InternalAxiosRequestConfig) => {
       const token = getCookie(cookieKeys.ACCESS_TOKEN);
@@ -46,10 +43,6 @@ export const AxiosInterceptor = ({ children }: AxiosInterceptorProps) => {
         errorMessage = response.data.message;
       }
 
-      if (response?.status && [401, 403].includes(response?.status)) {
-        signOut();
-      }
-
       toast.error(errorMessage);
 
       return Promise.reject(error);
@@ -68,6 +61,6 @@ export const AxiosInterceptor = ({ children }: AxiosInterceptorProps) => {
       httpClient.interceptors.request.eject(reqInterceptor);
       httpClient.interceptors.request.eject(resInterceptor);
     };
-  }, [signOut]);
+  }, []);
   return children;
 };
