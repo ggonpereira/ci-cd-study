@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { createContext, useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { PageLoader } from "../../view/components/PageLoader";
+import { LaunchScreen } from "../../view/components/LaunchScreen";
 import { cookieKeys } from "../config/cookieKeys";
 import { usersService } from "../services/usersService";
 import { MeResponse } from "../services/usersService/me";
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return !!token;
   });
 
-  const { isError, isSuccess, data, isFetching } = useQuery({
+  const { isError, isSuccess, data, isFetching, remove } = useQuery({
     queryKey: ["users", "me"],
     queryFn: () => usersService.me(),
     enabled: signedIn,
@@ -46,7 +46,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const signOut = useCallback(() => {
     destroyCookie(cookieKeys.ACCESS_TOKEN);
     setSignedIn(false);
-  }, []);
+    remove();
+  }, [remove]);
 
   useEffect(() => {
     if (isError) {
@@ -54,10 +55,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       signOut();
     }
   }, [isError, signOut]);
-
-  if (isFetching) {
-    return <PageLoader />;
-  }
 
   return (
     <AuthContext.Provider
@@ -68,7 +65,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         signOut,
       }}
     >
-      {children}
+      <LaunchScreen isLoading={isFetching} />
+
+      {!isFetching && children}
     </AuthContext.Provider>
   );
 };
