@@ -6,7 +6,7 @@ export const httpClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-const reqSuccessInterceptor = (config: InternalAxiosRequestConfig) => {
+const reqSuccessInterceptor = async (config: InternalAxiosRequestConfig) => {
   const token = getCookie(cookieKeys.ACCESS_TOKEN);
 
   if (token) {
