@@ -1,11 +1,11 @@
-import { createContext, useCallback, useEffect, useState } from "react";
-import { destroyCookie, getCookie, setCookie } from "../utils/cookie";
-import { cookieKeys } from "../config/cookieKeys";
 import { useQuery } from "@tanstack/react-query";
-import { usersService } from "../services/usersService";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { PageLoader } from "../../view/components/PageLoader";
+import { cookieKeys } from "../config/cookieKeys";
+import { usersService } from "../services/usersService";
 import { MeResponse } from "../services/usersService/me";
+import { destroyCookie, getCookie, setCookie } from "../utils/cookie";
 
 interface AuthContextValue {
   signedIn: boolean;

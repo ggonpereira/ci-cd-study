@@ -1,9 +1,9 @@
-import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { AuthGuard } from "./AuthGuard";
-import { Login } from "../view/pages/Login";
-import { Register } from "../view/pages/Register";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Dashboard } from "../view/pages/Dashboard";
 import { AuthLayout } from "../view/pages/Layouts";
+import { Login } from "../view/pages/Login";
+import { Register } from "../view/pages/Register";
+import { AuthGuard } from "./AuthGuard";
 
 export const Router = () => {
   return (

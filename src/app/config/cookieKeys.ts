@@ -1,3 +1,3 @@
 export const cookieKeys = {
-  ACCESS_TOKEN: 'finovia:access_token'
-}
+  ACCESS_TOKEN: "finovia:access_token",
+};

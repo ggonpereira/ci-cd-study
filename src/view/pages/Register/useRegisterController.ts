@@ -1,10 +1,10 @@
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { z } from "zod";
 import { authService } from "../../../app/services/authService";
-import { useMutation } from "@tanstack/react-query";
 import { SignUpParams } from "../../../app/services/authService/signUp";
-import { toast } from "react-hot-toast";
 
 const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$/;
 

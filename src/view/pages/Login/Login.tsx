@@ -1,7 +1,7 @@
-import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { FormHeader } from "../../components/FormHeader";
 import { FormRoot } from "../../components/FormRoot";
+import { Input } from "../../components/Input";
 import { useLoginController } from "./useLoginController";
 
 export const Login = () => {
