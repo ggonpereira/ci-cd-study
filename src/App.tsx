@@ -1,9 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "react-hot-toast";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
 import { Router } from "./Router";
 import { AuthProvider } from "./app/contexts/AuthContext";
-import { AxiosInterceptor } from "./app/services/httpClient";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,12 +16,10 @@ const queryClient = new QueryClient({
 export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <AxiosInterceptor>
-        <AuthProvider>
-          <Router />
-          <Toaster />
-        </AuthProvider>
-      </AxiosInterceptor>
+      <AuthProvider>
+        <Router />
+        <Toaster />
+      </AuthProvider>
 
       <ReactQueryDevtools />
     </QueryClientProvider>
