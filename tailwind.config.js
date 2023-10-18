@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontSize: {
+        "3.5xl": ["32px", "32px"],
+      },
       colors: {
         gray: {
           0: "#F8F9FA",
