@@ -1,10 +1,11 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EyeIcon } from "../../../components/icons/EyeIcon";
+import { EyeIcon } from "../../../../components/icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
 
 import "swiper/css";
-import { iconsMap } from "../../../components/icons/BankAccountTypeIcon/iconsMap";
+import { iconsMap } from "../../../../components/icons/BankAccountTypeIcon/iconsMap";
 import { AccountsSliderNavigation } from "./AccountsSliderNavigation";
+import { useAccountsController } from "./useAccountsController";
 
 const accounts = [
   {
@@ -28,6 +29,8 @@ const accounts = [
 ];
 
 export const Accounts = () => {
+  const { sliderState, setSliderState } = useAccountsController();
+
   return (
     <div className="flex h-full w-full flex-col rounded-2xl bg-blue-900 p-10 text-white md:px-4 md:py-8">
       <div className="flex flex-col gap-2 text-white">
@@ -46,7 +49,16 @@ export const Accounts = () => {
 
       <div className="flex flex-1 flex-col justify-end">
         <div>
-          <Swiper spaceBetween={16} slidesPerView={2.2}>
+          <Swiper
+            spaceBetween={16}
+            slidesPerView={2.2}
+            onSlideChange={(swiper) => {
+              setSliderState({
+                isBeginning: swiper.isBeginning,
+                isEnd: swiper.isEnd,
+              });
+            }}
+          >
             <div
               className="mb-4 flex items-center justify-between"
               slot="container-start"
@@ -55,7 +67,10 @@ export const Accounts = () => {
                 My accounts
               </span>
 
-              <AccountsSliderNavigation />
+              <AccountsSliderNavigation
+                isBeginning={sliderState.isBeginning}
+                isEnd={sliderState.isEnd}
+              />
             </div>
 
             {accounts.map((account) => (
