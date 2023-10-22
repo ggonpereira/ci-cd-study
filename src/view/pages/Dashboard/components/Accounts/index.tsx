@@ -3,6 +3,7 @@ import { EyeIcon } from "../../../../components/icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
 
 import "swiper/css";
+import { formatCurrency } from "../../../../../app/utils/formatCurrency";
 import { iconsMap } from "../../../../components/icons/BankAccountTypeIcon/iconsMap";
 import { AccountsSliderNavigation } from "./AccountsSliderNavigation";
 import { useAccountsController } from "./useAccountsController";
@@ -29,7 +30,7 @@ const accounts = [
 ];
 
 export const Accounts = () => {
-  const { sliderState, setSliderState } = useAccountsController();
+  const { sliderState, setSliderState, windowWidth } = useAccountsController();
 
   return (
     <div className="flex h-full w-full flex-col rounded-2xl bg-blue-900 p-10 text-white md:px-4 md:py-8">
@@ -38,7 +39,7 @@ export const Accounts = () => {
 
         <div className="flex items-center gap-2">
           <strong className="text-3.5xl font-bold tracking-[-1px]">
-            $ 2,500.00
+            {formatCurrency(2500)}
           </strong>
 
           <button className="flex h-8 w-8 items-center justify-center">
@@ -47,11 +48,11 @@ export const Accounts = () => {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col justify-end">
+      <div className="mt-10 flex flex-1 flex-col justify-end md:mt-0">
         <div>
           <Swiper
             spaceBetween={16}
-            slidesPerView={2.2}
+            slidesPerView={windowWidth >= 500 ? 2.2 : 1.2}
             onSlideChange={(swiper) => {
               setSliderState({
                 isBeginning: swiper.isBeginning,
