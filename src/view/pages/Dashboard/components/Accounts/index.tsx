@@ -1,11 +1,12 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EyeIcon } from "../../../../components/icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
 
 import "swiper/css";
+import { cn } from "../../../../../app/utils/cn";
 import { formatCurrency } from "../../../../../app/utils/formatCurrency";
 import { iconsMap } from "../../../../components/icons/BankAccountTypeIcon/iconsMap";
-import { AccountsSliderNavigation } from "./AccountsSliderNavigation";
+import { EyeIcon } from "../../../../components/icons/EyeIcon";
+import { SliderNavigation } from "./SliderNavigation";
 import { useAccountsController } from "./useAccountsController";
 
 const accounts = [
@@ -30,7 +31,13 @@ const accounts = [
 ];
 
 export const Accounts = () => {
-  const { sliderState, setSliderState, windowWidth } = useAccountsController();
+  const {
+    areValuesHidden,
+    toggleValuesVisibility,
+    sliderState,
+    setSliderState,
+    windowWidth,
+  } = useAccountsController();
 
   return (
     <div className="flex h-full w-full flex-col rounded-2xl bg-blue-900 p-10 text-white md:px-4 md:py-8">
@@ -38,12 +45,20 @@ export const Accounts = () => {
         <span className="tracking-[-0.5px]">Total balance</span>
 
         <div className="flex items-center gap-2">
-          <strong className="text-3.5xl font-bold tracking-[-1px]">
+          <strong
+            className={cn(
+              "text-3.5xl font-bold tracking-[-1px] transition-all",
+              areValuesHidden && "blur-md",
+            )}
+          >
             {formatCurrency(2500)}
           </strong>
 
-          <button className="flex h-8 w-8 items-center justify-center">
-            <EyeIcon open />
+          <button
+            className="flex h-8 w-8 items-center justify-center"
+            onClick={toggleValuesVisibility}
+          >
+            <EyeIcon open={areValuesHidden} />
           </button>
         </div>
       </div>
@@ -68,7 +83,7 @@ export const Accounts = () => {
                 My accounts
               </span>
 
-              <AccountsSliderNavigation
+              <SliderNavigation
                 isBeginning={sliderState.isBeginning}
                 isEnd={sliderState.isEnd}
               />

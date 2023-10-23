@@ -1,6 +1,8 @@
+import { cn } from "../../../../../app/utils/cn";
 import { formatCurrency } from "../../../../../app/utils/formatCurrency";
 import { BankAccountTypeIcon } from "../../../../components/icons/BankAccountTypeIcon";
 import { iconsMap } from "../../../../components/icons/BankAccountTypeIcon/iconsMap";
+import { useAccountsController } from "./useAccountsController";
 
 interface AccountCardProps {
   name: string;
@@ -15,6 +17,8 @@ export const AccountCard = ({
   color,
   icon,
 }: AccountCardProps) => {
+  const { areValuesHidden } = useAccountsController();
+
   return (
     <div
       className="flex h-[200px] flex-col justify-between rounded-2xl border-b-4 border-teal-950 bg-white p-4"
@@ -29,7 +33,12 @@ export const AccountCard = ({
       </div>
 
       <div>
-        <span className="block text-base font-medium tracking-[-0.5px] text-gray-800">
+        <span
+          className={cn(
+            "block text-base font-medium tracking-[-0.5px] text-gray-800",
+            areValuesHidden && "blur-sm",
+          )}
+        >
           {formatCurrency(balance)}
         </span>
         <small className="text-sm text-gray-600">Current balance</small>
