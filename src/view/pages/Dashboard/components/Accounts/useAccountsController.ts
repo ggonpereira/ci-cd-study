@@ -6,6 +6,7 @@ export const useAccountsController = () => {
   const windowWidth = useWindowWidth();
   const { areValuesHidden, toggleValuesVisibility } = useDashboardContext();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [sliderState, setSliderState] = useState({
     isBeginning: true,
     isEnd: false,
@@ -17,5 +18,7 @@ export const useAccountsController = () => {
     windowWidth,
     areValuesHidden,
     toggleValuesVisibility,
+    isLoading,
+    setIsLoading,
   };
 };
