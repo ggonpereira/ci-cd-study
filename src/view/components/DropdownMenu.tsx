@@ -16,7 +16,7 @@ interface DropdownMenuItemProps extends DropdownMenuProps {
 
 const DropdownMenuRoot = ({ children }: Children) => {
   return <RdxDropdownMenu.Root>{children}</RdxDropdownMenu.Root>;
-}
+};
 
 const DropdownMenuTrigger = ({ children, className }: DropdownMenuProps) => {
   return (
