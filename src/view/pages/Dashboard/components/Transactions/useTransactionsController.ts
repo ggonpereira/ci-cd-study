@@ -24,6 +24,6 @@ export const useTransactionsController = () => {
     isLoading,
     setIsLoading,
     setIsInitialLoading,
-    transactions: [] as any[],
+    transactions,
   };
 };

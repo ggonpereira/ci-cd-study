@@ -41,6 +41,6 @@ export const useAccountsController = () => {
     toggleValuesVisibility,
     isLoading,
     setIsLoading,
-    accounts: [],
+    accounts,
   };
 };
